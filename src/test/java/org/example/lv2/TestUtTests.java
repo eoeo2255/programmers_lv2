@@ -7,11 +7,55 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class TestUtTests {
     @Test
-    @DisplayName("")
+    @DisplayName("getAge")
     void t1() {
-        int age = TestUt.call(new Person(), "getAge");
+        int age = (int) TestUt.call(new Person(), "getAge");
         assertThat(age).isEqualTo(10);
     }
+
+    @Test
+    @DisplayName("getAge 10")
+    void t2() {
+        int age = (int) TestUt.call(new Person(), "getAge", 10);
+        assertThat(age).isEqualTo(20);
+    }
+
+    @Test
+    @DisplayName("getAge 10, 20")
+    void t3() {
+        int age = (int) TestUt.call(new Person(), "getAge", 10, 20);
+        assertThat(age).isEqualTo(40);
+    }
+
+    @Test
+    @DisplayName("getAge \"100\"")
+    void t4() {
+        int age = (int) TestUt.call(new Person(), "getAge", "100");
+        assertThat(age).isEqualTo(110);
+    }
+
+    @Test
+    @DisplayName("getName")
+    void t5() {
+        String name = (String) TestUt.call(new Person(), "getName");
+        assertThat(name).isEqualTo("폴");
+    }
+
+    @Test
+    @DisplayName("getName \"님\"")
+    void t6() {
+        String name = (String) TestUt.call(new Person(), "getName", "님");
+        assertThat(name).isEqualTo("폴님");
+    }
+
+    @Test
+    @DisplayName("getMe()")
+    void t7() {
+        Person p = new Person();
+        Person me = (Person) TestUt.call(p, "getMe");
+        assertThat(me).isEqualTo(p);
+    }
+
 }
 
 class Person {
