@@ -185,5 +185,16 @@ public class Tests {
                 );
     }
 
+    @Test
+    @DisplayName("maxPoint [Point.of(4, 1), Point.of(-1, 6)]")
+    void t6() {
+        assertThat(new Solution()
+                .positivePoints(
+                        Set.of(Point.of(1, 1), Point.of(-1, 1)))
+        )
+                .isEqualTo(
+                        Set.of(Point.of(2,0), Point.of(0,0))
+                );
+    }
 
 }
