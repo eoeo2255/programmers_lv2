@@ -1,8 +1,6 @@
 package org.example.lv2;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Main {
 }
@@ -39,8 +37,8 @@ class Solution {
         return Point.of(x, y);
     }
 
-    public List<Point> intersections(int[][] line) {
-        List<Point> points = new ArrayList<>();
+    public Set<Point> intersections(int[][] line) { // Set은 중복을 허용하지 않는다.
+        Set<Point> points = new HashSet<>();
 
         for (int i = 0; i < line.length; i++) {
             for (int j = i+1; j < line.length; j++) {
@@ -86,4 +84,9 @@ class Point {
         return y == point.y;
     }
 
+    // 객체의 고유키를 비교, 속도 빠름, 가독성 안좋음
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
 }
