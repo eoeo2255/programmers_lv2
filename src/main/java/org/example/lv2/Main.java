@@ -1,11 +1,9 @@
 package org.example.lv2;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 
 public class Main {
@@ -14,7 +12,8 @@ public class Main {
 
 class Solution {
     public String[] solution(int[][] line) {
-        Set<Point> points = intersections(line).toSet();
+
+        Points points = intersections(line);
 
         char[][] matrix = transformToMatrix(points);
 
@@ -70,7 +69,7 @@ class Solution {
         return points;
     }
 
-    public Point getMinPoint(Set<Point> points) {
+    public Point getMinPoint(Points points) {
         long x = Long.MAX_VALUE;
         long y = Long.MAX_VALUE;
 
@@ -81,7 +80,7 @@ class Solution {
         return Point.of(x, y);
     }
 
-    public Point getMaxPoint(Set<Point> points) {
+    public Point getMaxPoint(Points points) {
         long x = Long.MIN_VALUE;
         long y = Long.MIN_VALUE;
 
@@ -93,7 +92,7 @@ class Solution {
     }
 
     // 빈 필드 생성
-    public char[][] emptyMatrix(Set<Point> points) {
+    public char[][] emptyMatrix(Points points) {
         Point minPoint = getMinPoint(points);
         Point maxPoint = getMaxPoint(points);
 
@@ -108,16 +107,19 @@ class Solution {
     }
 
     // 필드를 (0,0) 위치로 만들기
-    public Set<Point> positivePoints(Set<Point> points) {
+    public Points positivePoints(Points points) {
         Point minPoint = getMinPoint(points);
 
-        return points.stream()
+        return Points.of(
+                points.stream()
                 .map(p -> Point.of(p.x - minPoint.x, p.y - minPoint.y))
-                .collect(Collectors.toSet());
+                .toArray(Point[]::new)
+        );
+
     }
 
     // 교점의 위치에 * 찍기
-    public char[][] transformToMatrix(Set<Point> points) {
+    public char[][] transformToMatrix(Points points) {
         char[][] matrix = emptyMatrix(points);
         points = positivePoints(points);
 
@@ -172,7 +174,7 @@ class Point {
     }
 }
 
-class Points {
+class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 사용할 수 없기 때문에 implements Iterable<Point>를 쓴다.
     private final Set<Point> data;
 
     private Points(Set<Point> data) {
@@ -204,6 +206,15 @@ class Points {
     @Override
     public int hashCode() {
         return Objects.hash(data);
+    }
+
+    @Override
+    public Iterator<Point> iterator() { // 일급콜렉션을 for each문으로 돌리기 위해 사용
+        return data.iterator();
+    }
+
+    public Stream<Point> stream() {
+        return data.stream();
     }
 }
 
