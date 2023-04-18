@@ -14,7 +14,7 @@ public class Tests {
                 .intersection(
                         new int[]{1, -1, 0},
                         new int[]{2, -1, 0}))
-                .isEqualTo(new long[] {0,0})
+                .isEqualTo(Point.of(0,0))
         ;
     }
 
@@ -25,7 +25,7 @@ public class Tests {
                 .intersection(
                         new int[]{1, -1, 0},
                         new int[]{4, -1, 0}))
-                .isEqualTo(new long[] {0,0})
+                .isEqualTo(Point.of(0,0))
         ;
     }
 
@@ -36,7 +36,7 @@ public class Tests {
                 .intersection(
                         new int[]{2, -1, 0},
                         new int[]{4, -1, 0}))
-                .isEqualTo(new long[] {0,0})
+                .isEqualTo(Point.of(0,0))
         ;
     }
 
