@@ -89,8 +89,18 @@ public class Tests {
     void t2_3() {
         assertThat(new Solution()
                 .intersections(
-                        new int[][] {{1, -1, 0},{2, -1, 0}, {4, -1, 0}}))
+                        new int[][] {{1, -1, 0}, {2, -1, 0}, {4, -1, 0}}))
                 .isEqualTo(Set.of(Point.of(0,0)))
+        ;
+    }
+
+    @Test
+    @DisplayName("교점 전부 구하기 [[2, -1, 4], [-2, -1, 4], [0, -1, 1], [5, -8, -12], [5, 8, 12]]")
+    void t2_4() {
+        assertThat(new Solution()
+                .intersections(
+                        new int[][] {{2, -1, 4}, {-2, -1, 4}, {0, -1, 1}, {5, -8, -12}, {5, 8, 12}}))
+                .isEqualTo(Set.of(Point.of(4, 1), Point.of(4, -4), Point.of(-4, -4), Point.of(-4, 1), Point.of(0, 4)))
         ;
     }
 
