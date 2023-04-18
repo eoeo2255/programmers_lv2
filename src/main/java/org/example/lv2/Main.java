@@ -14,7 +14,7 @@ public class Main {
 
 class Solution {
     public String[] solution(int[][] line) {
-        Set<Point> points = intersections(line);
+        Set<Point> points = intersections(line).toSet();
 
         char[][] matrix = transformToMatrix(points);
 
@@ -51,8 +51,8 @@ class Solution {
     }
 
     // 모든 교점 구하기 (정수로 이루어진 교점만)
-    public Set<Point> intersections(int[][] line) { // Set은 중복을 허용하지 않는다.
-        Set<Point> points = new HashSet<>();
+    public Points intersections(int[][] line) { // Set은 중복을 허용하지 않는다.
+        Points points = Points.of();
 
         for (int i = 0; i < line.length; i++) {
             for (int j = i + 1; j < line.length; j++) {
@@ -184,6 +184,26 @@ class Points {
                 Arrays.stream(pointArray)
                         .collect(Collectors.toCollection(HashSet::new))
         );
+    }
+
+    public boolean add(Point point) {
+        return data.add(point);
+    }
+
+    public Set<Point> toSet() {
+        return data;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Points points)) return false;
+        return Objects.equals(data, points.data);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(data);
     }
 }
 
