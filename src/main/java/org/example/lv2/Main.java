@@ -21,7 +21,7 @@ class Solution {
     }
 
     // 교점 하나 구하기
-    Point intersection(int[] line1, int[] line2) {
+    private Point intersection(int[] line1, int[] line2) {
         double A = line1[0];
         double B = line1[1];
         double E = line1[2];

@@ -1,4 +1,4 @@
-package org.example.lv2;
+package org.example;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
