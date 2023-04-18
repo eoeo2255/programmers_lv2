@@ -172,6 +172,21 @@ class Point {
     }
 }
 
+class Points {
+    private final Set<Point> data;
+
+    private Points(Set<Point> data) {
+        this.data = data;
+    }
+
+    public static Points of(Point... pointArray) {
+        return new Points(
+                Arrays.stream(pointArray)
+                        .collect(Collectors.toCollection(HashSet::new))
+        );
+    }
+}
+
 class Ut {
     static IntStream revRange(int from, int to) {
         return IntStream.range(from, to)
