@@ -65,36 +65,13 @@ class Solution {
                 }
             }
         }
-
         return points;
-    }
-
-    public Point getMinPoint(Points points) {
-        long x = Long.MAX_VALUE;
-        long y = Long.MAX_VALUE;
-
-        for (Point point : points) {
-            x = Math.min(x, point.x);
-            y = Math.min(y, point.y);
-        }
-        return Point.of(x, y);
-    }
-
-    public Point getMaxPoint(Points points) {
-        long x = Long.MIN_VALUE;
-        long y = Long.MIN_VALUE;
-
-        for (Point point : points) {
-            x = Math.max(x, point.x);
-            y = Math.max(y, point.y);
-        }
-        return Point.of(x, y);
     }
 
     // 빈 필드 생성
     public char[][] emptyMatrix(Points points) {
-        Point minPoint = getMinPoint(points);
-        Point maxPoint = getMaxPoint(points);
+        Point minPoint = points.getMinPoint();
+        Point maxPoint = points.getMaxPoint();
 
         int width = (int) (maxPoint.x - minPoint.x + 1);
         int height = (int) (maxPoint.y - minPoint.y + 1);
@@ -108,7 +85,7 @@ class Solution {
 
     // 필드를 (0,0) 위치로 만들기
     public Points positivePoints(Points points) {
-        Point minPoint = getMinPoint(points);
+        Point minPoint = points.getMinPoint();
 
         return Points.of(
                 points.stream()
@@ -216,6 +193,29 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
     public Stream<Point> stream() {
         return data.stream();
     }
+
+    public Point getMinPoint() {
+        long x = Long.MAX_VALUE;
+        long y = Long.MAX_VALUE;
+
+        for (Point point : data) {
+            x = Math.min(x, point.x);
+            y = Math.min(y, point.y);
+        }
+        return Point.of(x, y);
+    }
+
+    public Point getMaxPoint() {
+        long x = Long.MIN_VALUE;
+        long y = Long.MIN_VALUE;
+
+        for (Point point : data) {
+            x = Math.max(x, point.x);
+            y = Math.max(y, point.y);
+        }
+        return Point.of(x, y);
+    }
+
 }
 
 class Ut {

@@ -110,9 +110,8 @@ public class Tests {
     @Test
     @DisplayName("minPoint [Point.of(1, 1), Point.of(-1, 1)]")
     void t03() {
-        assertThat(new Solution()
-                .getMinPoint(
-                        Points.of(Point.of(1, 1), Point.of(-1, 1)))
+        assertThat(
+                Points.of(Point.of(1, 1), Point.of(-1, 1)).getMinPoint()
         )
                 .isEqualTo(Point.of(-1, 1)
                 );
@@ -121,9 +120,8 @@ public class Tests {
     @Test
     @DisplayName("minPoint [Point.of(-5, 1), Point.of(-1, -7)]")
     void t03_2() {
-        assertThat(new Solution()
-                .getMinPoint(
-                        Points.of(Point.of(-5, 1), Point.of(-1, -7)))
+        assertThat(
+                Points.of(Point.of(-5, 1), Point.of(-1, -7)).getMinPoint()
         )
                 .isEqualTo(Point.of(-5, -7)
                 );
@@ -132,9 +130,8 @@ public class Tests {
     @Test
     @DisplayName("maxPoint [Point.of(1, 1), Point.of(-1, 1)]")
     void t04() {
-        assertThat(new Solution()
-                .getMaxPoint(
-                        Points.of(Point.of(1, 1), Point.of(-1, 1)))
+        assertThat(
+                Points.of(Point.of(1, 1), Point.of(-1, 1)).getMaxPoint()
         )
                 .isEqualTo(Point.of(1, 1)
                 );
@@ -143,16 +140,15 @@ public class Tests {
     @Test
     @DisplayName("maxPoint [Point.of(4, 1), Point.of(-1, 6)]")
     void t04_2() {
-        assertThat(new Solution()
-                .getMaxPoint(
-                        Points.of(Point.of(4, 1), Point.of(-1, 6)))
+        assertThat(
+                Points.of(Point.of(4, 1), Point.of(-1, 6)).getMaxPoint()
         )
                 .isEqualTo(Point.of(4, 6)
                 );
     }
 
     @Test
-    @DisplayName("maxPoint [Point.of(4, 1), Point.of(-1, 6)]")
+    @DisplayName("emptyMatrix [Point.of(4, 1), Point.of(-1, 6)]")
     void t05() {
         assertThat(new Solution()
                 .emptyMatrix(
