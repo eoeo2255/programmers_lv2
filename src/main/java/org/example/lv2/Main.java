@@ -2,6 +2,7 @@ package org.example.lv2;
 
 import java.util.*;
 
+
 public class Main {
 }
 
@@ -78,6 +79,19 @@ class Solution {
         return Point.of(x,y);
     }
 
+    public char[][] emptyMatrix(Set<Point> points) {
+        Point minPoint = getMinPoint(points);
+        Point maxPoint = getMaxPoint(points);
+
+        int width = (int) (maxPoint.x - minPoint.x +1);
+        int height = (int) (maxPoint.y - minPoint.y +1);
+
+        char[][] matrix = new char[height][width];
+
+        Arrays.stream(matrix).forEach(row -> Arrays.fill(row, '.'));
+
+        return matrix;
+    }
 }
 
 class Point {
