@@ -1,6 +1,9 @@
 package org.example.lv2;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -25,17 +28,21 @@ class Solution {
         double D = line2[1];
         double F = line2[2];
 
-        double divisor = A * D - B* C;
+        double divisor = A * D - B * C;
 
         if (divisor == 0) {
             return null;
         }
 
         double x = (B * F - E * D) / divisor;
-        double y = (E * C - A* F) / divisor;
+        double y = (E * C - A * F) / divisor;
 
-        if (x != (long)x) {return null;}
-        if (y != (long)y) {return null;}
+        if (x != (long) x) {
+            return null;
+        }
+        if (y != (long) y) {
+            return null;
+        }
 
         return Point.of(x, y);
     }
@@ -44,7 +51,7 @@ class Solution {
         Set<Point> points = new HashSet<>();
 
         for (int i = 0; i < line.length; i++) {
-            for (int j = i+1; j < line.length; j++) {
+            for (int j = i + 1; j < line.length; j++) {
                 int[] line1 = line[i];
                 int[] line2 = line[j];
 
@@ -63,30 +70,30 @@ class Solution {
         long x = Long.MAX_VALUE;
         long y = Long.MAX_VALUE;
 
-        for (Point point: points) {
+        for (Point point : points) {
             x = Math.min(x, point.x);
             y = Math.min(y, point.y);
         }
-        return Point.of(x,y);
+        return Point.of(x, y);
     }
 
     public Point getMaxPoint(Set<Point> points) {
         long x = Long.MIN_VALUE;
         long y = Long.MIN_VALUE;
 
-        for (Point point: points) {
+        for (Point point : points) {
             x = Math.max(x, point.x);
             y = Math.max(y, point.y);
         }
-        return Point.of(x,y);
+        return Point.of(x, y);
     }
 
     public char[][] emptyMatrix(Set<Point> points) {
         Point minPoint = getMinPoint(points);
         Point maxPoint = getMaxPoint(points);
 
-        int width = (int) (maxPoint.x - minPoint.x +1);
-        int height = (int) (maxPoint.y - minPoint.y +1);
+        int width = (int) (maxPoint.x - minPoint.x + 1);
+        int height = (int) (maxPoint.y - minPoint.y + 1);
 
         char[][] matrix = new char[height][width];
 
@@ -132,11 +139,11 @@ class Point {
 
 
     public static Point of(long x, long y) {
-        return new Point(x,y);
+        return new Point(x, y);
     }
 
     public static Point of(double x, double y) {
-        return of((long) x ,(long) y);
+        return of((long) x, (long) y);
     }
 
     @Override
