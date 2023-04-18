@@ -14,11 +14,14 @@ public class Main {
 
 class Solution {
     public String[] solution(int[][] line) {
-        String[] answer = {};
-        return answer;
+        Set<Point> points = intersections(line);
+
+        char[][] matrix = transformToMatrix(points);
+
+        return drawOnCoordinate(matrix);
     }
 
-
+    // 교점 하나 구하기
     public Point intersection(int[] line1, int[] line2) {
         double A = line1[0];
         double B = line1[1];
@@ -47,6 +50,7 @@ class Solution {
         return Point.of(x, y);
     }
 
+    // 모든 교점 구하기 (정수로 이루어진 교점만)
     public Set<Point> intersections(int[][] line) { // Set은 중복을 허용하지 않는다.
         Set<Point> points = new HashSet<>();
 
@@ -88,6 +92,7 @@ class Solution {
         return Point.of(x, y);
     }
 
+    // 빈 필드 생성
     public char[][] emptyMatrix(Set<Point> points) {
         Point minPoint = getMinPoint(points);
         Point maxPoint = getMaxPoint(points);
@@ -102,6 +107,7 @@ class Solution {
         return matrix;
     }
 
+    // 필드를 (0,0) 위치로 만들기
     public Set<Point> positivePoints(Set<Point> points) {
         Point minPoint = getMinPoint(points);
 
@@ -110,6 +116,7 @@ class Solution {
                 .collect(Collectors.toSet());
     }
 
+    // 교점의 위치에 * 찍기
     public char[][] transformToMatrix(Set<Point> points) {
         char[][] matrix = emptyMatrix(points);
         points = positivePoints(points);
@@ -119,6 +126,7 @@ class Solution {
         return matrix;
     }
 
+    // 교점의 위치와 필드의 위치 맞추기
     public String[] drawOnCoordinate(char[][] matrix) {
         return Ut.revRange(0, matrix.length)
                 .boxed()
