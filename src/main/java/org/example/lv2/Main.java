@@ -15,7 +15,7 @@ class Solution {
 
         Points points = intersections(line);
 
-        char[][] matrix = transformToMatrix(points);
+        char[][] matrix = points.toMatrix();
 
         return drawOnCoordinate(matrix);
     }
@@ -66,31 +66,6 @@ class Solution {
             }
         }
         return points;
-    }
-
-    // 빈 필드 생성
-    public char[][] emptyMatrix(Points points) {
-        Point minPoint = points.getMinPoint();
-        Point maxPoint = points.getMaxPoint();
-
-        int width = (int) (maxPoint.x - minPoint.x + 1);
-        int height = (int) (maxPoint.y - minPoint.y + 1);
-
-        char[][] matrix = new char[height][width];
-
-        Arrays.stream(matrix).forEach(row -> Arrays.fill(row, '.'));
-
-        return matrix;
-    }
-
-    // 교점의 위치에 * 찍기
-    public char[][] transformToMatrix(Points points) {
-        char[][] matrix = emptyMatrix(points);
-        points = points.positivePoints();
-
-        points.forEach(p -> matrix[(int) p.y][(int) p.x] = '*');
-
-        return matrix;
     }
 
     // 교점의 위치와 필드의 위치 맞추기
@@ -213,6 +188,31 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
                         .map(p -> Point.of(p.x - minPoint.x, p.y - minPoint.y))
                         .toArray(Point[]::new)
         );
+    }
+
+    // 교점의 위치에 * 찍기
+    public char[][] toMatrix() {
+        char[][] matrix = emptyMatrix();
+        Points points = positivePoints();
+
+        points.forEach(p -> matrix[(int) p.y][(int) p.x] = '*');
+
+        return matrix;
+    }
+
+    // 빈 필드 생성
+    public char[][] emptyMatrix() {
+        Point minPoint = getMinPoint();
+        Point maxPoint = getMaxPoint();
+
+        int width = (int) (maxPoint.x - minPoint.x + 1);
+        int height = (int) (maxPoint.y - minPoint.y + 1);
+
+        char[][] matrix = new char[height][width];
+
+        Arrays.stream(matrix).forEach(row -> Arrays.fill(row, '.'));
+
+        return matrix;
     }
 }
 
