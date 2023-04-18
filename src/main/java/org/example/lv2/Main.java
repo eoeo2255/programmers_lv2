@@ -21,7 +21,7 @@ class Solution {
     }
 
     // 교점 하나 구하기
-    public Point intersection(int[] line1, int[] line2) {
+    Point intersection(int[] line1, int[] line2) {
         double A = line1[0];
         double B = line1[1];
         double E = line1[2];
@@ -50,7 +50,7 @@ class Solution {
     }
 
     // 모든 교점 구하기 (정수로 이루어진 교점만)
-    public Points intersections(int[][] line) { // Set은 중복을 허용하지 않는다.
+    Points intersections(int[][] line) { // Set은 중복을 허용하지 않는다.
         Points points = Points.of();
 
         for (int i = 0; i < line.length; i++) {
@@ -69,7 +69,7 @@ class Solution {
     }
 
     // 교점의 위치와 필드의 위치 맞추기
-    public String[] drawOnCoordinate(char[][] matrix) {
+    String[] drawOnCoordinate(char[][] matrix) {
         return Ut.revRange(0, matrix.length)
                 .boxed()
                 .map(i -> matrix[i])
@@ -132,10 +132,6 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
         return data.add(point);
     }
 
-    public Set<Point> toSet() {
-        return data;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -157,7 +153,7 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
         return data.stream();
     }
 
-    public Point getMinPoint() {
+    Point getMinPoint() {
         long x = Long.MAX_VALUE;
         long y = Long.MAX_VALUE;
 
@@ -168,7 +164,7 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
         return Point.of(x, y);
     }
 
-    public Point getMaxPoint() {
+    Point getMaxPoint() {
         long x = Long.MIN_VALUE;
         long y = Long.MIN_VALUE;
 
@@ -180,7 +176,7 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
     }
 
     // 필드를 (0,0) 위치로 만들기
-    public Points positivePoints() {
+    Points positivePoints() {
         Point minPoint = getMinPoint();
 
         return Points.of(
@@ -190,18 +186,8 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
         );
     }
 
-    // 교점의 위치에 * 찍기
-    public char[][] toMatrix() {
-        char[][] matrix = emptyMatrix();
-        Points points = positivePoints();
-
-        points.forEach(p -> matrix[(int) p.y][(int) p.x] = '*');
-
-        return matrix;
-    }
-
     // 빈 필드 생성
-    public char[][] emptyMatrix() {
+    char[][] emptyMatrix() {
         Point minPoint = getMinPoint();
         Point maxPoint = getMaxPoint();
 
@@ -214,10 +200,21 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
 
         return matrix;
     }
+
+    // 교점의 위치에 * 찍기
+    public char[][] toMatrix() {
+        char[][] matrix = emptyMatrix();
+        Points points = positivePoints();
+
+        points.forEach(p -> matrix[(int) p.y][(int) p.x] = '*');
+
+        return matrix;
+    }
+
 }
 
 class Ut {
-    static IntStream revRange(int from, int to) {
+    public static IntStream revRange(int from, int to) {
         return IntStream.range(from, to)
                 .map(i -> to - i + from - 1);
     }
