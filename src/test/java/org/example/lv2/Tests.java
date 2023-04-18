@@ -187,9 +187,8 @@ public class Tests {
     @Test
     @DisplayName("positivePoints [Point.of(4, 1), Point.of(-1, 6)]")
     void t06() {
-        assertThat(new Solution()
-                .positivePoints(
-                        Points.of(Point.of(1, 1), Point.of(-1, 1)))
+        assertThat(
+                Points.of(Point.of(1, 1), Point.of(-1, 1)).positivePoints()
         )
                 .isEqualTo(
                         Points.of(Point.of(2, 0), Point.of(0, 0))
@@ -199,9 +198,8 @@ public class Tests {
     @Test
     @DisplayName("positivePoints [Point.of(4, -7), Point.of(-1, 6)]")
     void t06_2() {
-        assertThat(new Solution()
-                .positivePoints(
-                        Points.of(Point.of(4, -7), Point.of(-1, 6)))
+        assertThat(
+                Points.of(Point.of(4, -7), Point.of(-1, 6)).positivePoints()
         )
                 .isEqualTo(
                         Points.of(Point.of(5, 0), Point.of(0, 13))

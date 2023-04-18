@@ -83,22 +83,10 @@ class Solution {
         return matrix;
     }
 
-    // 필드를 (0,0) 위치로 만들기
-    public Points positivePoints(Points points) {
-        Point minPoint = points.getMinPoint();
-
-        return Points.of(
-                points.stream()
-                .map(p -> Point.of(p.x - minPoint.x, p.y - minPoint.y))
-                .toArray(Point[]::new)
-        );
-
-    }
-
     // 교점의 위치에 * 찍기
     public char[][] transformToMatrix(Points points) {
         char[][] matrix = emptyMatrix(points);
-        points = positivePoints(points);
+        points = points.positivePoints();
 
         points.forEach(p -> matrix[(int) p.y][(int) p.x] = '*');
 
@@ -216,6 +204,16 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
         return Point.of(x, y);
     }
 
+    // 필드를 (0,0) 위치로 만들기
+    public Points positivePoints() {
+        Point minPoint = getMinPoint();
+
+        return Points.of(
+                data.stream()
+                        .map(p -> Point.of(p.x - minPoint.x, p.y - minPoint.y))
+                        .toArray(Point[]::new)
+        );
+    }
 }
 
 class Ut {
