@@ -1,4 +1,4 @@
-package org.example.lv2;
+package org.example.N87377;
 
 import org.example.TestUt;
 import org.junit.jupiter.api.DisplayName;
@@ -99,29 +99,31 @@ public class SolutionTests {
     @Test
     @DisplayName("minPoint [Point.of(1, 1), Point.of(-1, 1)]")
     void t03() {
-        assertThat(
-                Points.of(Point.of(1, 1), Point.of(-1, 1)).getMinPoint()
-        )
-                .isEqualTo(Point.of(-1, 1)
-                );
+        assertThat((Point) TestUt.call(
+                        Points.of(Point.of(1, 1), Point.of(-1, 1)),
+                        "getMinPoint"))
+                .isEqualTo(
+                Point.of(-1, 1)
+        );
     }
+
 
     @Test
     @DisplayName("minPoint [Point.of(-5, 1), Point.of(-1, -7)]")
     void t03_2() {
-        assertThat(
-                Points.of(Point.of(-5, 1), Point.of(-1, -7)).getMinPoint()
-        )
-                .isEqualTo(Point.of(-5, -7)
-                );
+        assertThat((Point) TestUt.call(
+                        Points.of(Point.of(-5, 1), Point.of(-1, -7)),
+                        "getMinPoint"))
+                .isEqualTo(
+                Point.of(-5, -7)
+        );
     }
 
     @Test
     @DisplayName("maxPoint [Point.of(1, 1), Point.of(-1, 1)]")
     void t04() {
-        assertThat(
-                Points.of(Point.of(1, 1), Point.of(-1, 1)).getMaxPoint()
-        )
+        assertThat((Point) TestUt.call(
+                Points.of(Point.of(1, 1), Point.of(-1, 1)), "getMaxPoint"))
                 .isEqualTo(Point.of(1, 1)
                 );
     }
@@ -129,9 +131,8 @@ public class SolutionTests {
     @Test
     @DisplayName("maxPoint [Point.of(4, 1), Point.of(-1, 6)]")
     void t04_2() {
-        assertThat(
-                Points.of(Point.of(4, 1), Point.of(-1, 6)).getMaxPoint()
-        )
+        assertThat((Point) TestUt.call(
+                Points.of(Point.of(4, 1), Point.of(-1, 6)), "getMaxPoint"))
                 .isEqualTo(Point.of(4, 6)
                 );
     }
@@ -139,9 +140,8 @@ public class SolutionTests {
     @Test
     @DisplayName("emptyMatrix [Point.of(4, 1), Point.of(-1, 6)]")
     void t05() {
-        assertThat(
-                Points.of(Point.of(1, 1), Point.of(-1, 1)).emptyMatrix()
-        )
+        assertThat((char[][]) TestUt.call(
+                Points.of(Point.of(1, 1), Point.of(-1, 1)),"emptyMatrix"))
                 .isEqualTo(
                         new char[][]{{'.', '.', '.'}}
                 );
@@ -150,9 +150,8 @@ public class SolutionTests {
     @Test
     @DisplayName("emptyMatrix, [Point.of(4, -7), Point.of(-1, 6)]")
     void t05_2() {
-        assertThat(
-                Points.of(Point.of(4, -7), Point.of(-1, 6)).emptyMatrix()
-        )
+        assertThat((char[][]) TestUt.call(
+                Points.of(Point.of(4, -7), Point.of(-1, 6)),"emptyMatrix"))
                 .isEqualTo(
                         new char[][]{
                                 {'.', '.', '.', '.', '.', '.'},
@@ -175,9 +174,8 @@ public class SolutionTests {
     @Test
     @DisplayName("positivePoints [Point.of(4, 1), Point.of(-1, 6)]")
     void t06() {
-        assertThat(
-                Points.of(Point.of(1, 1), Point.of(-1, 1)).positivePoints()
-        )
+        assertThat((Points) TestUt.call(
+                Points.of(Point.of(1, 1), Point.of(-1, 1)), "positivePoints"))
                 .isEqualTo(
                         Points.of(Point.of(2, 0), Point.of(0, 0))
                 );
@@ -186,9 +184,8 @@ public class SolutionTests {
     @Test
     @DisplayName("positivePoints [Point.of(4, -7), Point.of(-1, 6)]")
     void t06_2() {
-        assertThat(
-                Points.of(Point.of(4, -7), Point.of(-1, 6)).positivePoints()
-        )
+        assertThat((Points) TestUt.call(
+                Points.of(Point.of(4, -7), Point.of(-1, 6)),"positivePoints"))
                 .isEqualTo(
                         Points.of(Point.of(5, 0), Point.of(0, 13))
                 );

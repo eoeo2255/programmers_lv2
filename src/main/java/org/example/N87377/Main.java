@@ -1,8 +1,8 @@
-package org.example.lv2;
+package org.example.N87377;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import org.example.Ut;
 import java.util.stream.Stream;
 
 
@@ -153,7 +153,7 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
         return data.stream();
     }
 
-    Point getMinPoint() {
+    private Point getMinPoint() {
         long x = Long.MAX_VALUE;
         long y = Long.MAX_VALUE;
 
@@ -164,7 +164,7 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
         return Point.of(x, y);
     }
 
-    Point getMaxPoint() {
+    private Point getMaxPoint() {
         long x = Long.MIN_VALUE;
         long y = Long.MIN_VALUE;
 
@@ -176,7 +176,7 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
     }
 
     // 필드를 (0,0) 위치로 만들기
-    Points positivePoints() {
+    private Points positivePoints() {
         Point minPoint = getMinPoint();
 
         return Points.of(
@@ -187,7 +187,7 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
     }
 
     // 빈 필드 생성
-    char[][] emptyMatrix() {
+    private char[][] emptyMatrix() {
         Point minPoint = getMinPoint();
         Point maxPoint = getMaxPoint();
 
@@ -211,11 +211,4 @@ class Points implements Iterable<Point>{ // 일급콜렉션을 for each문에 �
         return matrix;
     }
 
-}
-
-class Ut {
-    public static IntStream revRange(int from, int to) {
-        return IntStream.range(from, to)
-                .map(i -> to - i + from - 1);
-    }
 }
