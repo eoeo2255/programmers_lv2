@@ -138,4 +138,26 @@ public class Tests {
         );
     }
 
+    @Test
+    @DisplayName("ABCDAAAAKK, moveCostBy3 → 7")
+    void t14() {
+        assertThat(
+                new Solution().directionCheck3("ABCDAAAAKK")
+        ).isEqualTo(
+                7
+        );
+    }
+
+    @Test
+    @DisplayName("ADAAAABCDKK, moveCostBy3 → 11")
+    void t15() {
+        assertThat(
+                new Solution().directionCheck3("ADAAAABCDKK")
+        ).isEqualTo(
+                11
+        );
+    }
+
+
+
 }

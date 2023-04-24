@@ -70,6 +70,20 @@ class Solution {
     }
 
 
+    public int directionCheck3(String name) {       // 'A'가 연속한 부분이 있음, 뒤로 갔다가 다시 앞으로 이동했을 경우 이동 횟수
+        Ut.longestContinuumLengthAndIndex indexNlength = Ut.getLongestContinuumLengthAndIndex(name,'A');
+
+        if (indexNlength.index == -1) {         // 'A' 구간이 없음
+            moveCount(name);
+        }
+
+        int onlyBackCount = name.length() - (indexNlength.index + indexNlength.length);     // 뒤로 이동 했을 때, 마지막 ~ 'A' 연속 구간이 나오기 전까지의 거리
+        int movingBack = onlyBackCount * 2;     // 뒤로 이동 했을 때, 마지막 ~ 'A' 연속 구간이 나오기 전까지의 거리를 '왕복'한 횟수 (왕복이기 때문에 '*2')
+
+        int movingFront = indexNlength.index-1;          // 'A' 가 나오기 '전'까지의 거리를 구해야 하기 때문에 'A' 구간의 시작인덱스에서 '-1'을 해줘야 함
+
+        return movingBack + movingFront;
+    }
 }
 
 class Ut{       // 'A'가 연속하는 구간이 있을 경우, 해당 구간의 시작 인덱스번호와 길이를 반환 (feat. chatGPT)
