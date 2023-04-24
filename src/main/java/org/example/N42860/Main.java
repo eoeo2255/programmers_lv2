@@ -19,7 +19,7 @@ class Solution {
         for (int i = 0; i < name.length(); i++) {
             char c = name.charAt(i);
 
-            int diff = Math.min(c-'A', 'Z' - c +1);     // 앞으로 갈지 (전자 식), 뒤로 갈지 (후자 식) 결정
+            int diff = Math.min(c-'A', 'Z' - c +1);     // 앞으로 갔을 때와 (전자 식), 뒤로 갔을 때의 (후자 식) 값을 비교해 방향 결정, 최소 횟수를 구해야 하기 때문에 Math.min 사용
             // Math.min()은 두 값이 같을 경우, 같은 값을 반환 (여기서는 정 가운데인 N(=13)의 값이 해당 됨)
 
             nameCount += diff;       // 총 nameCost 를 구하기 위해 더함
@@ -41,5 +41,28 @@ class Solution {
             }
         }
         return moveCount;
+    }
+
+    public int directionCheck(String name) {        // 'A'가 연속한 부분이 있음, 앞으로만 이동했을 경우 이동 횟수
+        int move = 0;
+
+        for (int i = 0; i < name.length(); i++) {
+            if (name.charAt(i) != 'A') {
+                move = i;
+            }
+        }
+
+        return move;
+    }
+
+    public int directionCheck2(String name) {       // 'A'가 연속한 부분이 있음, 뒤로만 이동했을 경우 이동 횟수
+        int move = 0;
+
+        for (int i = name.length()-1; i > 1; i--) {
+            if (name.charAt(i) != 'A') {
+                move = name.length() - i;
+            }
+        }
+        return move;
     }
 }

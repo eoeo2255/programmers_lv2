@@ -68,4 +68,54 @@ public class Tests {
         );
     }
 
+    @Test
+    @DisplayName("KAABC, onlyMoveCount → 4")
+    void t07() {
+        assertThat(
+                new Solution().directionCheck("KAABC")
+        ).isEqualTo(
+                4
+        );
+    }
+
+    @Test
+    @DisplayName("KAABCAAA, onlyMoveCount → 4")
+    void t08() {
+        assertThat(
+                new Solution().directionCheck("KAABCAAA")
+        ).isEqualTo(
+                4
+        );
+    }
+
+    @Test
+    @DisplayName("KAABC, onlyMoveCount → 2")
+    void t09() {
+        assertThat(
+                new Solution().directionCheck2("KAABC")
+        ).isEqualTo(
+                2
+        );
+    }
+
+    @Test
+    @DisplayName("KAABCAAA, onlyMoveCount → 5")
+    void t010() {
+        assertThat(
+                new Solution().directionCheck2("KAABCAAA")
+        ).isEqualTo(
+                5
+        );
+    }
+
+    @Test
+    @DisplayName("AAAAA, onlyMoveCount → 0")
+    void t011() {
+        assertThat(
+                new Solution().directionCheck2("AAAAA")
+        ).isEqualTo(
+                0
+        );
+    }
+
 }
