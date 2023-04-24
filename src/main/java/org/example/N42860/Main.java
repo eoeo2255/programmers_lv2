@@ -36,7 +36,7 @@ class Solution {
 
             int diff = Math.min(c-'A', 'Z' - c +1);
 
-            if (diff > 0) {         // 만약 'A'와 차이가 없을 경우 ('A'인 경우)
+            if (diff > 0) {         // 'A'가 아닌 경우, 해당 값까지의 이동 횟수 ('A'인 경우 해당 값까지 갈 필요가 없음)
                 moveCount = i;
             }
         }
