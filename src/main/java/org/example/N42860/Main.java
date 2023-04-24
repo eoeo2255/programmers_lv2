@@ -5,10 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
-    public static void main(String[] args) {
-        Solution s = new Solution();
-        System.out.println(s.solution("JEROEN"));  // 56
-    }
 }
 
 
@@ -17,7 +13,7 @@ class Solution {
         return nameCount(name) + moveCount(name);
     }
 
-    public int nameCount(String name) {
+    private int nameCount(String name) {
         int nameCount = 0;   // 문자 바꾸는데 필요한 횟수, 위/아래
 
         for (int i = 0; i < name.length(); i++) {
@@ -34,7 +30,7 @@ class Solution {
 
     public int moveCount(String name) {
         if (name.length() == 1) return 0;       //  name 의 길이가 1일 경우 moveCount 없음
-        if (Ut.isAllA(name.substring(1), 'A')) return 0;        //  모두 'A' 로만 이루어져 있을 경우 0을 반환
+        if (Ut.isAllA(name.substring(1), 'A')) return 0;        //  (처음 1개만 'A'가 아니거나) 모두 'A' 로만 이루어져 있을 경우 0을 반환
 
         return List.of(directionCheck(name), directionCheck2(name), directionCheck3(name), directionCheck4(name))
                 .stream()
@@ -43,7 +39,7 @@ class Solution {
                 .orElse(0);
     }
 
-    public int directionCheck(String name) {        // 'A'가 연속한 부분이 있음, 앞으로만 이동했을 경우 이동 횟수
+    public int directionCheck(String name) {        // 앞으로만 이동했을 경우 이동 횟수
         int move = 0;
 
         for (int i = 0; i < name.length(); i++) {
@@ -55,7 +51,7 @@ class Solution {
         return move;
     }
 
-    public int directionCheck2(String name) {       // 'A'가 연속한 부분이 있음, 뒤로만 이동했을 경우 이동 횟수
+    public int directionCheck2(String name) {       // 뒤로만 이동했을 경우 이동 횟수
         int move = 0;
 
         for (int i = name.length()-1; i >= 1; i--) {
@@ -67,15 +63,15 @@ class Solution {
     }
 
 
-    public int directionCheck3(String name) {       // 'A'가 연속한 부분이 있음, 뒤로 갔다가 다시 앞으로 이동했을 경우 이동 횟수
+    public int directionCheck3(String name) {       // 뒤로 갔다가 다시 앞으로 이동했을 경우 이동 횟수
         Ut.longestContinuumLengthAndIndex indexNlength = Ut.getLongestContinuumLengthAndIndex(name,'A');
 
         if (indexNlength.index == -1) {         // 'A' 구간이 없음
-            moveCount(name);
+            return directionCheck(name);       //  'A' 구간이 없을 경우 앞으로 가든, 뒤로 가든 상관 없기 때문에 directionCheck 함수 사용
         }
 
-        int onlyBackCount = name.length() - (indexNlength.index + indexNlength.length);     // 뒤로 이동 했을 때, 마지막 ~ 'A' 연속 구간이 나오기 전까지의 거리
-        int movingBack = onlyBackCount * 2;     // 뒤로 이동 했을 때, 마지막 ~ 'A' 연속 구간이 나오기 전까지의 거리를 '왕복'한 횟수 (왕복이기 때문에 '*2')
+        int onlyBackCount = name.length() - (indexNlength.index + indexNlength.length);     // 뒤로 이동 했을 때, 마지막 ~ 'A' 구간이 나오기 전까지의 거리
+        int movingBack = onlyBackCount * 2;     // 뒤로 이동 했을 때, 마지막 ~ 'A' 구간이 나오기 전까지의 거리를 '왕복'한 횟수 (왕복이기 때문에 '*2')
 
         int movingFront = indexNlength.index-1;          // 'A' 가 나오기 '전'까지의 거리를 구해야 하기 때문에 'A' 구간의 시작인덱스에서 '-1'을 해줘야 함
 
@@ -86,7 +82,7 @@ class Solution {
         Ut.longestContinuumLengthAndIndex indexNlength = Ut.getLongestContinuumLengthAndIndex(name, 'A');
 
         if (indexNlength.index == -1) {
-            moveCount(name);
+            return directionCheck(name);
         }
 
         int onlyFrontCount = indexNlength.index-1;
