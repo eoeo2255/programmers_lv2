@@ -19,7 +19,8 @@ class Solution {
         for (int i = 0; i < name.length(); i++) {
             char c = name.charAt(i);
 
-            int diff = c - 'A';     // 'A'와 얼마나 차이가 나는지 계산, 'A'가 되려면 몇번 움직여야하는지 해당 칸의 nameCost 를 구함
+            int diff = Math.min(c-'A', 'Z' - c +1);     // 앞으로 갈지 (전자 식), 뒤로 갈지 (후자 식) 결정
+            // Math.min()은 두 값이 같을 경우, 같은 값을 반환 (여기서는 정 가운데인 N(=13)의 값이 해당 됨)
 
             nameCount += diff;       // 총 nameCost 를 구하기 위해 더함
         }
@@ -28,18 +29,17 @@ class Solution {
     }
 
     public int moveCount(String name) {
-        int moveCount = 0;   // 위치 바꾸는데 드는 비용, 좌/우
+        int moveCount = 0;   // 위치 바꾸는데 필요한 횟수, 좌/우
 
         for (int i = 0; i < name.length(); i++) {
             char c = name.charAt(i);
 
-            int diff = c - 'A';     // 'A'와 얼마나 차이가 나는지 계산, 'A'가 되려면 몇번 움직여야하는지 해당 칸의 nameCost 를 구함
+            int diff = Math.min(c-'A', 'Z' - c +1);
 
             if (diff > 0) {         // 만약 'A'와 차이가 없을 경우 ('A'인 경우)
                 moveCount = i;
             }
         }
-
         return moveCount;
     }
 }
