@@ -7,22 +7,12 @@ public class Main {
     }
 }
 
-//"JEROEN"	56
-//"JAN"	23
 
 class Solution {
     public int solution(String name) {
-        return 0;
-    }
+        char c = name.charAt(0);
 
-    public int[] changeToIntArray(String name) {
-        int[] asciiNumber = new int[name.length()];
-
-        for (int i = 0; i < asciiNumber.length; i++) {
-            asciiNumber[i] = (int) name.charAt(i);
-        }
-
-        return asciiNumber;
+        return c - 'A';
     }
 
 }

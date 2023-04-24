@@ -1,20 +1,32 @@
 package org.example.N42860;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class Tests {
 
     @Test
-    @DisplayName("문자열을 int[]로 바꾸기")
-    void t01() {
-        assertThat(new Solution()
-                .changeToIntArray("ABC")
-                .equals(new int[]{0,1,2}));
+    @DisplayName("BAA => 1")
+    void t01() {assertThat(new Solution()
+            .solution("BAA"))
+            .isEqualTo(1)
+        ;
     }
 
+    @Test
+    @DisplayName("CAA => 2")
+    void t02() {
+        assertThat(
+                new Solution().solution("CAA")
+        ).isEqualTo(
+                2
+        );
+    }
 
 
 }
