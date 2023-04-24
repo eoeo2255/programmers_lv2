@@ -1,5 +1,8 @@
 package org.example.N42860;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Main {
     public static void main(String[] args) {
         Solution s = new Solution();
@@ -65,4 +68,57 @@ class Solution {
         }
         return move;
     }
+
+
+}
+
+class Ut{       // 'A'가 연속하는 구간이 있을 경우, 해당 구간의 시작 인덱스번호와 길이를 반환 (feat. chatGPT)
+
+    public static class longestContinuumLengthAndIndex {
+        int index;
+        int length;
+
+        public longestContinuumLengthAndIndex(int index, int length) {
+            this.index = index;
+            this.length = length;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof longestContinuumLengthAndIndex that)) return false;
+
+            if (index != that.index) return false;
+            return length == that.length;
+        }
+
+        @Override
+        public String toString() {
+            return "LongestCharContinuumIndexAndLength{" +
+                    "index=" + index +
+                    ", length=" + length +
+                    '}';
+        }
+    }
+
+        public static longestContinuumLengthAndIndex getLongestContinuumLengthAndIndex(String str, char c) {
+            String regex = c + "+";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(str);
+
+            int maxLength = 0;
+            int maxIndex = -1;
+
+            while (matcher.find()) {
+                int startIndex = matcher.start();
+                int length = matcher.end() - startIndex;
+
+                if (length > maxLength) {
+                    maxLength = length;
+                    maxIndex = startIndex;
+                }
+            }
+
+            return new longestContinuumLengthAndIndex(maxIndex, maxLength);
+        }
 }

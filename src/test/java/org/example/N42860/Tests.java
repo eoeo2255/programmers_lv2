@@ -118,4 +118,24 @@ public class Tests {
         );
     }
 
+    @Test
+    @DisplayName("KBAAAATK, longestContinuumLengthAndIndex → index = 2, length = 4")
+    void t012() {
+        assertThat(
+                Ut.getLongestContinuumLengthAndIndex("KBAAAATK", 'A')
+        ).isEqualTo(
+                new Ut.longestContinuumLengthAndIndex(2,4)
+        );
+    }
+
+    @Test
+    @DisplayName("Ut.longestContinuumLengthAndIndex(\"KAAAABAAAATK\", 'A') → rs.index: 1, rs.length: 4")
+    void t13() {
+        assertThat(
+                Ut.getLongestContinuumLengthAndIndex("KAAAABAAAATK", 'A')
+        ).isEqualTo(
+                new Ut.longestContinuumLengthAndIndex(1, 4)
+        );
+    }
+
 }
