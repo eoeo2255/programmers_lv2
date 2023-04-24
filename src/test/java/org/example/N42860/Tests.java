@@ -69,7 +69,7 @@ public class Tests {
     }
 
     @Test
-    @DisplayName("KAABC, onlyMoveCount → 4")
+    @DisplayName("KAABC, directionCheck → 4")
     void t07() {
         assertThat(
                 new Solution().directionCheck("KAABC")
@@ -79,7 +79,7 @@ public class Tests {
     }
 
     @Test
-    @DisplayName("KAABCAAA, onlyMoveCount → 4")
+    @DisplayName("KAABCAAA, directionCheck → 4")
     void t08() {
         assertThat(
                 new Solution().directionCheck("KAABCAAA")
@@ -89,7 +89,7 @@ public class Tests {
     }
 
     @Test
-    @DisplayName("KAABC, onlyMoveCount → 2")
+    @DisplayName("KAABC, directionCheck2 → 2")
     void t09() {
         assertThat(
                 new Solution().directionCheck2("KAABC")
@@ -99,7 +99,7 @@ public class Tests {
     }
 
     @Test
-    @DisplayName("KAABCAAA, onlyMoveCount → 5")
+    @DisplayName("KAABCAAA, directionCheck2 → 5")
     void t010() {
         assertThat(
                 new Solution().directionCheck2("KAABCAAA")
@@ -109,7 +109,7 @@ public class Tests {
     }
 
     @Test
-    @DisplayName("AAAAA, onlyMoveCount → 0")
+    @DisplayName("AAAAA, directionCheck2 → 0")
     void t011() {
         assertThat(
                 new Solution().directionCheck2("AAAAA")
@@ -139,7 +139,7 @@ public class Tests {
     }
 
     @Test
-    @DisplayName("ABCDAAAAKK, moveCostBy3 → 7")
+    @DisplayName("ABCDAAAAKK, directionCheck3 → 7")
     void t14() {
         assertThat(
                 new Solution().directionCheck3("ABCDAAAAKK")
@@ -149,7 +149,7 @@ public class Tests {
     }
 
     @Test
-    @DisplayName("ADAAAABCDKK, moveCostBy3 → 11")
+    @DisplayName("ADAAAABCDKK, directionCheck3 → 11")
     void t15() {
         assertThat(
                 new Solution().directionCheck3("ADAAAABCDKK")
@@ -158,6 +158,54 @@ public class Tests {
         );
     }
 
+    @Test
+    @DisplayName("ADAAAABCDKK, directionCheck4 → 7")
+    void t16() {
+        assertThat(
+                new Solution().directionCheck4("ADAAAABCDKK")
+        ).isEqualTo(
+                7
+        );
+    }
 
+    @Test
+    @DisplayName("KKAAE, directionCheck4 → 3")
+    void t17() {
+        assertThat(
+                new Solution().directionCheck4("KKAAE")
+        ).isEqualTo(
+                3
+        );
+    }
+
+    @Test
+    @DisplayName("ADAAAABCDKK, moveCost → 7")
+    void t18() {
+        assertThat(
+                new Solution().moveCount("ADAAAABCDKK")
+        ).isEqualTo(
+                7
+        );
+    }
+
+    @Test
+    @DisplayName("JEROEN, solution → 56")
+    void t19() {
+        assertThat(
+                new Solution().solution("JEROEN")
+        ).isEqualTo(
+                56
+        );
+    }
+
+    @Test
+    @DisplayName("JAN, solution → 23")
+    void t20() {
+        assertThat(
+                new Solution().solution("JAN")
+        ).isEqualTo(
+                23
+        );
+    }
 
 }

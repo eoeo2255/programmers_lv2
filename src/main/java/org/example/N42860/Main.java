@@ -1,5 +1,6 @@
 package org.example.N42860;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,18 +33,14 @@ class Solution {
     }
 
     public int moveCount(String name) {
-        int moveCount = 0;   // 위치 바꾸는데 필요한 횟수, 좌/우
+        if (name.length() == 1) return 0;       //  name 의 길이가 1일 경우 moveCount 없음
+        if (Ut.isAllA(name.substring(1), 'A')) return 0;        //  모두 'A' 로만 이루어져 있을 경우 0을 반환
 
-        for (int i = 0; i < name.length(); i++) {
-            char c = name.charAt(i);
-
-            int diff = Math.min(c-'A', 'Z' - c +1);
-
-            if (diff > 0) {         // 'A'가 아닌 경우, 해당 값까지의 이동 횟수 ('A'인 경우 해당 값까지 갈 필요가 없음)
-                moveCount = i;
-            }
-        }
-        return moveCount;
+        return List.of(directionCheck(name), directionCheck2(name), directionCheck3(name), directionCheck4(name))
+                .stream()
+                .sorted()
+                .findFirst()
+                .orElse(0);
     }
 
     public int directionCheck(String name) {        // 'A'가 연속한 부분이 있음, 앞으로만 이동했을 경우 이동 횟수
@@ -61,7 +58,7 @@ class Solution {
     public int directionCheck2(String name) {       // 'A'가 연속한 부분이 있음, 뒤로만 이동했을 경우 이동 횟수
         int move = 0;
 
-        for (int i = name.length()-1; i > 1; i--) {
+        for (int i = name.length()-1; i >= 1; i--) {
             if (name.charAt(i) != 'A') {
                 move = name.length() - i;
             }
@@ -84,13 +81,35 @@ class Solution {
 
         return movingBack + movingFront;
     }
+
+    public int directionCheck4(String name) {
+        Ut.longestContinuumLengthAndIndex indexNlength = Ut.getLongestContinuumLengthAndIndex(name, 'A');
+
+        if (indexNlength.index == -1) {
+            moveCount(name);
+        }
+
+        int onlyFrontCount = indexNlength.index-1;
+        int movingFront = onlyFrontCount * 2;
+
+        int movingBack = name.length() - (indexNlength.index + indexNlength.length);
+
+        return movingFront + movingBack;
+    }
 }
 
 class Ut{       // 'A'가 연속하는 구간이 있을 경우, 해당 구간의 시작 인덱스번호와 길이를 반환 (feat. chatGPT)
 
+    public static boolean isAllA(String str, char c) {      //  모두 'A' 로만 이루어져 있을 경우
+        return str
+                .chars()
+                .allMatch(e -> c == e);
+    }
+
     public static class longestContinuumLengthAndIndex {
         int index;
         int length;
+
 
         public longestContinuumLengthAndIndex(int index, int length) {
             this.index = index;
@@ -100,7 +119,9 @@ class Ut{       // 'A'가 연속하는 구간이 있을 경우, 해당 구간의
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof longestContinuumLengthAndIndex that)) return false;
+            if (!(o instanceof longestContinuumLengthAndIndex)) return false;
+
+            longestContinuumLengthAndIndex that = (longestContinuumLengthAndIndex) o;
 
             if (index != that.index) return false;
             return length == that.length;
