@@ -1,32 +1,51 @@
 package org.example.N42862;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 }
 
 class Solution {
-
     private int borrowCount;
-    private Set<Integer> borrowClothes = new HashSet<>();
-    private Set<Integer> extraClothes = new HashSet<>();
+    private final Set<Integer> borrowClothes = new HashSet<>();
+    private final Set<Integer> extraClothes = new HashSet<>();
 
-    public int solution(int n, int[] lost, int[] reserve) {
+    private final List<Integer> borrowMe = new ArrayList<>();
+
+    public int solution(int n, int[] lostArr, int[] reserveArr) {
+        // 가변 리스트로 변환 (개발의 편의성)
+        List<Integer> lost = Arrays.stream(lostArr).boxed().sorted().collect(Collectors.toCollection(ArrayList::new));
+        List<Integer> reserve = Arrays.stream(reserveArr).boxed().sorted().collect(Collectors.toCollection(ArrayList::new));
+
         borrowSuccess(lost, reserve);
-        return (n - lost.length) + borrowCount;
+        return (n - lost.size()) + borrowCount;
     }
 
-    public int borrowSuccess(int[] lost, int[] reserve) {
+    public int borrowSuccess(List<Integer> lost, List<Integer> reserve) {
+        borrowSelf(lost, reserve);
+        useMine(lost, reserve);
 
-        for (int i = 0; i < lost.length; i++) {
-            for (int j = 0; j < reserve.length; j++) {
-                if (canIReserve(lost[i], reserve[j])) {
-                    duplication(lost[i], reserve[j]);
+        for (int i = 0; i < lost.size(); i++) {
+            for (int j = 0; j < reserve.size(); j++) {
+                if (canIReserve(lost.get(i), reserve.get(j))) {
+                    duplication(lost.get(i), reserve.get(j));
                 }
             }
         }
         return borrowCount;
+    }
+
+    private void useMine(List<Integer> lost, List<Integer> reserve) {
+        List<Integer> self = lost
+                .stream()
+                .filter(n -> reserve.contains(n))
+                .collect(Collectors.toList());
+
+        self.forEach(n -> {
+            lost.remove(Integer.valueOf(n));
+            reserve.remove(Integer.valueOf(n));
+        });
     }
 
     public boolean canIReserve(int lost, int reserve) {
@@ -49,6 +68,18 @@ class Solution {
         }
 
         return borrowCount;
+    }
+
+    public List<Integer> borrowSelf(List<Integer> lost, List<Integer> reserve) {
+
+        for (int i = 0; i < reserve.size(); i++) {
+            for (int j = 0; j < lost.size(); j++) {
+                if (reserve.get(i) == lost.get(j)) {
+                    borrowMe.add(reserve.get(i));
+                }
+            }
+        }
+        return borrowMe;
     }
 
 }

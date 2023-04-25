@@ -110,5 +110,13 @@ public class Tests {
         );
     }
 
-
+    @Test
+    @DisplayName("n-> 7 / lost-> [2, 3] / reserve-> [3, 4] = 6")
+    void t010() {
+        assertThat(
+                new Solution().solution(7,new int[]{2, 3},new int[]{3, 4})
+        ).isEqualTo(
+                6
+        );
+    }
 }
