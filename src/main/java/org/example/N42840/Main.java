@@ -17,9 +17,12 @@ public class Main {
  class Solution {
 
     public int[] solution(int[] answer) {
-        return Stream.of(student1(answer), student2(answer), student3(answer))
+        int maxPoint = Stream.of(student1(answer), student2(answer), student3(answer))
                 .mapToInt(Integer::intValue)
-                .toArray();                                 // 배열로 변환
+                .max()
+                .getAsInt();
+
+        return new int[]{maxPoint};
     }
 
     private int student1(int[] answer) {
