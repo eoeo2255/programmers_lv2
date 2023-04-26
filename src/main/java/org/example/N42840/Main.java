@@ -1,27 +1,40 @@
 package org.example.N42840;
 
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 public class Main {
+    public static void main(String[] args) {
+        System.out.println(
+                Arrays.toString(
+                        new Solution().solution(new int[]{1, 2, 3, 4, 5})
+                )
+        );
+    }
 }
 
-class Solution {
+ class Solution {
 
     public int[] solution(int[] answer) {
-        Student stu1 = new Student(1, new int[]{1, 2, 3, 4, 5});
-        Student stu2 = new Student(2, new int[]{2, 1, 2, 3, 2, 4, 2, 5});
-        Student stu3 = new Student(3, new int[]{3, 3, 1, 1, 2, 2, 4, 4, 5, 5});
-
-        int stu1Total = scoring(answer, stu1.getSubmit());
-        int stu2Total = scoring(answer, stu2.getSubmit());
-        int stu3Total = scoring(answer, stu3.getSubmit());
-
-        ranking(stu1Total, stu2Total, stu3Total);
-
-        return answer;
+        return Stream.of(student1(answer), student2(answer), student3(answer))
+                .mapToInt(Integer::intValue)
+                .toArray();                                 // 배열로 변환
     }
 
+    private int student1(int[] answer) {
+        return scoring(answer, new int[]{1, 2, 3, 4, 5});
+    }
 
-    private int scoring(int[] answers, int[] submit) {
+    private int student2(int[] answer) {
+        return scoring(answer, new int[]{2, 1, 2, 3, 2, 4, 2, 5});
+    }
+
+    private int student3(int[] answer) {
+        return scoring(answer, new int[]{3, 3, 1, 1, 2, 2, 4, 4, 5, 5});
+    }
+
+    private int scoring(int[] answers, int[] submit) {      // 정답패턴 배열과 답안 배열을 비교해 맞은 개수를 반환
         int score = 0;
 
         for (int i = 0; i < answers.length; i++) {
@@ -30,34 +43,5 @@ class Solution {
             }
         }
         return score;
-    }
-
-    private int[] ranking(int stu1Score, int stu2Score, int stu3Score) {
-        int[] rank = new int[3];
-
-        for (int i = 0; i < rank.length; i++) {
-
-        }
-
-        return rank;
-    }
-
-
-}
-
-class Student {
-    private final int studentNum;
-    private final int[] submit;
-    public Student(int studentNum, int[] submit) {
-        this.studentNum = studentNum;
-        this.submit = submit;
-    }
-
-    public int getStudentNum() {
-        return studentNum;
-    }
-
-    public int[] getSubmit() {
-        return submit;
     }
 }
