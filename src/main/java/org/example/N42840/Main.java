@@ -40,7 +40,7 @@ public class Main {
         return scoring(answer, new int[]{3, 3, 1, 1, 2, 2, 4, 4, 5, 5});
     }
 
-     private int scoring(int[] answers, int studentNo) {
+     private int scoring(int[] answers, int studentNo) {    //  점수와 학생 번호를 연결
          if (studentNo == 1) return student1(answers);
          if (studentNo == 2) return student2(answers);
 
