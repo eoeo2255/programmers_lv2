@@ -10,7 +10,19 @@ public class Main {
 
 class Solution {
     public int[] solution(String[] info, String[] query) {
+        Map<String, List<Integer>> scoresMap = buildScoresMap(info);
+
         int[] answer = new int[query.length];
+
+        for (int i = 0; i < answer.length; i++) {
+
+            int lastSpaceIndex = query[i].lastIndexOf(" "); // query문 각각, 제일 마지막에 등장하는 공백의 인덱스
+
+            String key = query[i].substring(0, lastSpaceIndex).replaceAll(" and ", " ");    //  query 문 내의 조건
+            int count = Integer.parseInt(query[i].substring(lastSpaceIndex + 1));   //  마지막 공백 제외하고 그 이후부터의 값
+
+            answer[i] = countBiggerThan(scoresMap.get(key), count);
+        }
         return answer;
     }
 
@@ -52,11 +64,23 @@ class Solution {
     }
 
     public int countBiggerThan(List<Integer> scores, int score) {
-        for (int i = 0; i < scores.size(); i++) {
-            if (scores.get(i) >= score) return scores.size() - i;       //  index는 0부터 시작
+        if (scores == null) return 0;
+        if (scores.isEmpty()) return 0;
+
+        int left = 0;
+        int right = scores.size() - 1;
+
+        while (left <= right) {
+            int mid = (left + right) / 2; // 중앙값
+
+            if (scores.get(mid) < score) {
+                left = mid + 1;             //  mid 값이 score 보다 작으면 좌측 포위망을 중앙값+1로  교체
+            } else {
+                right = mid - 1;            //  mid 값이 score 보다 크면 우측 포위망을 중앙값-1로  교체
+            }
         }
 
-        return 0;
+        return scores.size() - left;        //  이전 scores.size() - i; 과 동일
     }
 
 }

@@ -12,6 +12,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class Tests {
+
+    private final String[] query = new String[]{
+            "java and backend and junior and pizza 100",
+            "python and frontend and senior and chicken 200",
+            "cpp and - and senior and pizza 250",
+            "- and backend and senior and - 150",
+            "- and - and - and chicken 100",
+            "- and - and - and - 150"
+    };
     private final String[] info = new String[]{
             "java backend junior pizza 150",
             "python frontend senior chicken 210",
@@ -47,6 +56,14 @@ public class Tests {
         assertThat(
                 new Solution().countBiggerThan(List.of(2, 4, 6, 8, 10, 12, 14), 8)
         ).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("solution")
+    void t04() {
+        assertThat(
+                new Solution().solution(info, query)
+        ).containsExactly(1, 1, 1, 1, 2, 4);
     }
 
 }
