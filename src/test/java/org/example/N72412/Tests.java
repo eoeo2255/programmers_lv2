@@ -22,13 +22,31 @@ public class Tests {
     };
 
     @Test
-    @DisplayName("python frontend senior chicken -> 150, 210")
+    @DisplayName("python frontend senior chicken -> 150, 210")      //  점수를 반환
     void t01() {
-        Map<String, List<Integer>> scoresMap = new Solution().buildScores(info);
+        Map<String, List<Integer>> scoresMap = new Solution().buildScoresMap(info);
 
         List<Integer> scores = scoresMap.get("python frontend senior chicken");
 
         assertThat(scores).containsExactly(150, 210);
+    }
+
+    @Test
+    @DisplayName("java - - - → 80, 150")
+    void t02() {
+        Map<String, List<Integer>> scoresMap = new Solution().buildScoresMap(info);
+
+        List<Integer> scores = scoresMap.get("java - - -");
+
+        assertThat(scores).containsExactly(80, 150);
+    }
+
+    @Test
+    @DisplayName("[2, 4, 6, 8, 10, 12, 14], 8 → 4")     //  score 보다 크거나 같은 값의 개수 찾기
+    void t03() {
+        assertThat(
+                new Solution().countBiggerThan(List.of(2, 4, 6, 8, 10, 12, 14), 8)
+        ).isEqualTo(4);
     }
 
 }
