@@ -15,4 +15,10 @@ public class Tests {
                 .isEqualTo(101);
     }
 
+    @Test
+    @DisplayName("100, 100, {10, 10} -> 102")
+    void test00() {
+        assertThat(new Solution().solution(100, 100, new int[]{10, 10}))
+                .isEqualTo(102);
+    }
 }
