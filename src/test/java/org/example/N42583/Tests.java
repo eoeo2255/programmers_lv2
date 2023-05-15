@@ -17,8 +17,16 @@ public class Tests {
 
     @Test
     @DisplayName("100, 100, {10, 10} -> 102")
-    void test00() {
+    void test002() {
         assertThat(new Solution().solution(100, 100, new int[]{10, 10}))
                 .isEqualTo(102);
     }
+
+    @Test
+    @DisplayName("2, 10, {7,4,5,6} -> 8")
+    void test003() {
+        assertThat(new Solution().solution(2, 10, new int[]{7,4,5,6}))
+                .isEqualTo(8);
+    }
+
 }
