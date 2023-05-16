@@ -142,7 +142,7 @@ class Solution2 {
 
         int seconds = 0;
 
-        int onBridgeWeight = 0;         // 다리에 올려져 있는 무게
+        int onBridgeWeight = 0;         // 다리에 올라간 트럭들의 무게
         int truckIndex = 0;
 
         while (truckIndex < truck_weights.length) {              // 트럭이 모두 다 진입할 때 까지 반복
