@@ -1,7 +1,10 @@
 package org.example.N42583;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.stream.IntStream;
 
 public class Main {
 }
@@ -126,5 +129,43 @@ class Truck {
     private boolean isWaitingNumberZero() {             //  기다리는 트럭이 없을 경우
         if (started) return false;
         return prev == null || (prev.started && prev.seconds > 1);
+    }
+}
+
+
+class Solution2 {
+    public int solution(int bridge_length, int weight, int[] truck_weights) {
+        Queue<Integer> bridge = new LinkedList<>();
+
+        // 엘리먼트 0은 해당칸이 비어있음을 의미
+        IntStream.range(0, bridge_length).forEach(i -> bridge.add(0));       // 큐의 길이를 늘린다.
+
+        int seconds = 0;
+
+        int onBridgeWeight = 0;         // 다리에 올려져 있는 무게
+        int truckIndex = 0;
+
+        while (truckIndex < truck_weights.length) {              // 트럭이 모두 다 진입할 때 까지 반복
+            onBridgeWeight -= bridge.poll();                            // 다리 끝에 있는 트럭을 꺼낸다.
+
+            int truckWeight = truck_weights[truckIndex];        // 이번에 진입시켜야 하는 트럭의 무게
+
+            if (onBridgeWeight + truckWeight <= weight) {       // 트럭의 무게를 더해도 다리가 버티는 무게를 넘지 않으면 진입
+                bridge.add(truckWeight);
+                onBridgeWeight += truckWeight;
+                truckIndex++;
+            } else {
+                bridge.add(0);
+            }
+
+            seconds++;
+        }
+
+        while (onBridgeWeight > 0) {         // 다리 위에 남아 있는 트럭의 수가 0이 될 때까지 반복
+            seconds++;
+            onBridgeWeight -= bridge.poll();
+        }
+
+        return seconds;
     }
 }
