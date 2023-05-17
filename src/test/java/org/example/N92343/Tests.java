@@ -13,8 +13,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class Tests {
 
     @Test
-    @DisplayName("getNextNodes")
+    @DisplayName("{0,0,1,1,1,0,1,0,1,0,1,1}, {{0,1},{1,2},{1,4},{0,8},{8,7},{9,10},{9,11},{4,3},{6,5},{4,6},{8,9}} → 5")
     void t01() {
+        assertThat(
+                new Solution().solution(
+                        new int[]{0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1},
+                        new int[][]{{0, 1}, {1, 2}, {1, 4}, {0, 8}, {8, 7}, {9, 10}, {9, 11}, {4, 3}, {6, 5}, {4, 6}, {8, 9}}
+                )
+        ).isEqualTo(
+                5
+        );
+    }
+
+    @Test
+    @DisplayName("getNextNodes")
+    void t02() {
         PathCalculator pathCalculator = new PathCalculator(
                 new int[]{0, 0, 0},
                 new int[][]{{0, 1}, {0, 2}}
@@ -29,7 +42,7 @@ public class Tests {
     }
     @Test
     @DisplayName("getNextNodes with history")
-    void t02() {
+    void t03() {
         PathCalculator pathCalculator = new PathCalculator(
                 new int[]{0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0},
                 new int[][]{{0, 1}, {0, 2}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {3, 7}, {4, 8}, {6, 9}, {9, 10}}
@@ -45,7 +58,7 @@ public class Tests {
 
     @Test
     @DisplayName("getNextNodes with history")
-    void t03() {
+    void t04() {
         PathCalculator pathCalculator = new PathCalculator(
                 new int[]{0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0},
                 new int[][]{{0, 1}, {0, 2}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {3, 7}, {4, 8}, {6, 9}, {9, 10}}
@@ -61,7 +74,7 @@ public class Tests {
 
     @Test
     @DisplayName("getNextNodes with history")
-    void t04() {
+    void t05() {
         PathCalculator pathCalculator = new PathCalculator(
                 new int[]{0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0},
                 new int[][]{{0, 1}, {0, 2}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {3, 7}, {4, 8}, {6, 9}, {9, 10}}
@@ -84,7 +97,7 @@ public class Tests {
                 new int[][]{{0, 1}, {0, 2}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {3, 7}, {4, 8}, {6, 9}, {9, 10}}
         );
 
-        Path path = pathCalculator.wholePath();
+        Path path = pathCalculator.getFirstPath();
 
         System.out.println(path);
     }
