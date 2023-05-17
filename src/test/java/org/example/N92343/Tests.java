@@ -74,4 +74,18 @@ public class Tests {
                         List.of(3, 4, 6)
                 );
     }
+
+
+    @Test
+    @DisplayName("wholePath")
+    void t06() {
+        PathCalculator pathCalculator = new PathCalculator(
+                new int[]{0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0},
+                new int[][]{{0, 1}, {0, 2}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {3, 7}, {4, 8}, {6, 9}, {9, 10}}
+        );
+
+        Path path = pathCalculator.wholePath();
+
+        System.out.println(path);
+    }
 }
